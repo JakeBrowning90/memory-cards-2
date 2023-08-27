@@ -24,3 +24,15 @@ header {
 footer {
     background-color: rgb(252, 212, 212);
 }
+
+.startScreen {
+    background-color: rgb(242, 211, 86);
+}
+
+.cardBase {
+    background-color: rgb(216, 248, 216);
+    height: 600px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}

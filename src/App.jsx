@@ -3,6 +3,8 @@ import './styles/reset.css'
 import './styles/style.css'
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
+import StartScreen from './components/StartScreen';
+import CardBase from './components/CardBase';
 
 
 function App() {
@@ -11,7 +13,10 @@ function App() {
   return (
     <>
       <Header />
-      
+      <main>
+        <StartScreen />
+        <CardBase />
+      </main>
       <Footer />
     </>
   )
