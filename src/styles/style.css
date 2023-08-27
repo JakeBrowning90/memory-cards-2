@@ -1,4 +1,26 @@
-body {
-    color: white;
-    background-color: rgb(60, 8, 109);
+#root {
+    height: 100vh;
+    color: black;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 800px;
+    border: solid black 1px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#root > * {
+    border: solid black 1px;
+}
+
+header {
+    background-color: rgb(211, 211, 246);
+    display: flex;
+    justify-content: space-between;
+}
+
+footer {
+    background-color: rgb(252, 212, 212);
 }
