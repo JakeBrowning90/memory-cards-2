@@ -15,7 +15,6 @@ function App() {
   const [lastCard, setLastCard] = useState('');
 
   //Operations
-  //TODO - filter out videos, return only images
   //TODO: indicate game is ready, show button
   useEffect(() => {
     const getAPI = async () => {
