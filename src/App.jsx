@@ -16,12 +16,26 @@ function App() {
 
   //Operations
   //TODO - filter out videos, return only images
+  //TODO: indicate game is ready, show button
   useEffect(() => {
     const getAPI = async () => {
-      const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=G3yRcK9CYp4SUcGrP8lYzRxRAWrBkFyY1NlQx7q2&count=16&');
-      const data = await response.json();
-      // console.log(data)
-      setApiData(data)
+      
+        let response = await fetch('https://api.nasa.gov/planetary/apod?api_key=G3yRcK9CYp4SUcGrP8lYzRxRAWrBkFyY1NlQx7q2&count=16&');
+        let data = await response.json();
+        //console.log(data)
+        
+        let mediaCheck = data.filter(entry => {
+          return entry.media_type != "image";
+        })
+        // console.log(mediaCheck)
+        if (mediaCheck.length != 0) {
+           getAPI() 
+        } else {
+          setApiData(data)
+          console.log(data)
+        }
+      
+      // setApiData(data)
     }
     getAPI();
   }, []);

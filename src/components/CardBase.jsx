@@ -4,7 +4,8 @@ function CardBase({cardDeck}) {
 
     return <div className="cardBase">
         {cardDeck.map((card) => {
-            return <Card key={card.key} card={card}/>
+            //TODO: Add key props
+            return <Card card={card}/>
         })}
     </div>
 }
