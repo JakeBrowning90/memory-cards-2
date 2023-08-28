@@ -1,9 +1,9 @@
-function Header() {
+function Header({score, best}) {
     return <header>
-        <h1>Title</h1>
+        <h1>Astronomy Memory</h1>
         <div>
-            <p>Current score</p>
-            <p>Best score</p>
+            <p>Current score: {score}</p>
+            <p>Best score: {best}</p>
             <button>Reset game</button>
         </div>
     </header>
