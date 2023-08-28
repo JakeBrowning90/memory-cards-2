@@ -15,13 +15,7 @@ function App() {
   const [lastCard, setLastCard] = useState('');
 
   //Operations
-
-  // const getCards = async () => {
-  //   const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=G3yRcK9CYp4SUcGrP8lYzRxRAWrBkFyY1NlQx7q2&count=16&');
-  //   const data = await response.json();
-  //   console.log(data)
-  // }
-
+  //TODO - filter out videos, return only images
   useEffect(() => {
     const getAPI = async () => {
       const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=G3yRcK9CYp4SUcGrP8lYzRxRAWrBkFyY1NlQx7q2&count=16&');
@@ -34,23 +28,7 @@ function App() {
   
   const drawDeck = () => {
     apiData.forEach((item) => {
-      let card = new Object;
-      card.title = item.title;
-      card.url = item.url;
-      card.clicked = false;
-      setCardDeck(cardDeck.push(card))
-    })
-    console.log(cardDeck);
-    testDeal();
-  }
-
-  const testDeal = () => {
-    const cardBase = document.querySelector(".cardBase");
-    cardDeck.forEach((card) => {
-      let pic = document.createElement("img");
-      pic.classList.add("testPic");
-      pic.setAttribute("src", card.url);
-      cardBase.appendChild(pic);
+      setCardDeck((cardDeck) =>[...cardDeck, {key: item.index ,title: item.title, url: item.url, clicked: false}])
     })
   }
 
@@ -74,7 +52,7 @@ function App() {
       <Header score={score} best={best}/>
       <main>
         <StartScreen drawDeck={drawDeck}/>
-        <CardBase />
+        <CardBase cardDeck={cardDeck}/>
       </main>
       <Footer />
     </>

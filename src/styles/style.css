@@ -35,8 +35,17 @@ footer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
 }
 
-.testPic {
-    height: 100px;
+.gameCard {
+    height:100px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.pic {
+    height: 70px;
+    object-fit: fill;
 }
