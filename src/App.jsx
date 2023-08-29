@@ -122,7 +122,7 @@ function App() {
   }
 
   const startGame = () => {
-    // console.log(loadCount);
+    console.log(loadCount);
     let startScreen = document.querySelector(".startScreen");
     startScreen.classList.toggle("hidden");
     let cardBase = document.querySelector(".cardBase");
@@ -139,7 +139,7 @@ function App() {
       <Header score={score} best={best} resetCards={resetCards}/>
       <main>
         {/* <StartScreen drawDeck={drawDeck} /> */}
-        <StartScreen startGame={startGame} />
+        <StartScreen loadCount={loadCount} startGame={startGame} />
         <CardBase cardDeck={cardDeck} playTurn={playTurn} />
         <EndScreen refreshPage={refreshPage}/>
       </main>
