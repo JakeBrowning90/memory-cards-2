@@ -47,9 +47,14 @@ function App() {
 
   const playTurn = (e) => {
     const chosenCard = cardDeck.find(card => card.key == e.target.dataset.key);
-    markCardClicked(chosenCard.key)
-    increaseScore();
-    updateBest();
+    if (chosenCard.clicked == false) {
+      markCardClicked(chosenCard.key)
+      increaseScore();
+      updateBest();
+    } else {
+      resetGame();
+
+    }
     // console.log(chosenCard)
     shuffleCards();
   }
@@ -79,15 +84,27 @@ function App() {
     setScore(score => score + 1);
   };
 
-  const resetScore = () => {
-    setScore(score => score * 0);
-  };
-
   const updateBest = () => {
     if (score == best) {
       setBest(best => best + 1);
     }
   };
+
+  const resetGame = () => {
+    resetScore();
+    resetCards();
+  }
+
+  const resetScore = () => {
+    setScore(score => score * 0);
+  };
+
+  const resetCards = () => {
+    setCardDeck(cardDeck.map(card => {
+        return {...card, clicked: false};
+    }))
+  }
+
 
 
   return (
