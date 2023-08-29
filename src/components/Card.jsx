@@ -1,7 +1,10 @@
 function Card({card, playTurn}) {
         return <div className="gameCard">
         <img src={card.url} alt="" className="pic" data-key={card.key} onClick={playTurn}/>
-        <p>{card.key} {card.title}</p>
+        <p className="cardCaption">
+            {/* {card.key} */}
+            {card.title}
+        </p>
     </div>
     
 }
