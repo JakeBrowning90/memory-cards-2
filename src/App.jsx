@@ -9,6 +9,7 @@ import CardBase from './components/CardBase';
 
 function App() {
   // useState hooks
+  const [loadCount, setLoadCount] = useState(0);
   const [score, setScore] = useState(0);
   const [best, setBest] = useState(0);
   const [apiData, setApiData] = useState([])
@@ -36,8 +37,9 @@ function App() {
         getAPI()
       } else {
         setApiData(data)
+        setLoadCount(loadCount => loadCount + 1)
         //TODO: indicate game is ready, show button
-        console.log("Ready")
+        console.log(loadCount)
       }
     }
     getAPI();
@@ -45,8 +47,11 @@ function App() {
 
   useEffect(() => {
     if (score == 16) {
-      //ALT at 25 points, revert clicked to false and start new round
-      resetGame();
+      let cardBase = document.querySelector(".cardBase");
+      cardBase.classList.toggle("visibleBase");
+      let endScreen = document.querySelector(".endScreen");
+      endScreen.classList.toggle("visible");
+      // resetGame();
     }
   }, [score])
 
@@ -64,8 +69,8 @@ function App() {
       increaseScore();
       updateBest();
     } else {
-      resetGame();
-
+      resetCards();
+      resetScore()
     }
     shuffleCards();
   }
@@ -101,10 +106,10 @@ function App() {
     }
   };
 
-  const resetGame = () => {
-    resetScore();
-    drawDeck();
-  }
+  // const resetGame = () => {
+  //   resetScore();
+  //   drawDeck();
+  // }
 
   const resetScore = () => {
     setScore(score => score * 0);
@@ -117,6 +122,7 @@ function App() {
   }
 
   const startGame = () => {
+    // console.log(loadCount);
     let startScreen = document.querySelector(".startScreen");
     startScreen.classList.toggle("hidden");
     let cardBase = document.querySelector(".cardBase");
@@ -130,7 +136,7 @@ function App() {
 
   return (
     <>
-      <Header score={score} best={best} resetGame={resetGame}/>
+      <Header score={score} best={best} resetCards={resetCards}/>
       <main>
         {/* <StartScreen drawDeck={drawDeck} /> */}
         <StartScreen startGame={startGame} />

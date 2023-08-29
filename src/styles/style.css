@@ -35,6 +35,15 @@ main {
     background-color: rgb(242, 211, 86);
 }
 
+.endScreen {
+    display: none;
+}
+
+.visible {
+    display: flex;
+    flex-direction: column;
+}
+
 .cardBase {
     background-color: rgb(216, 248, 216);
     height: 600px;

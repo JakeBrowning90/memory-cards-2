@@ -4,7 +4,7 @@ function Header({score, best, resetGame}) {
         <div>
             <p>Current score: {score}</p>
             <p>Best score: {best}</p>
-            <button onClick={resetGame}>Reset cards</button>
+            {/* <button onClick={resetGame}>Reset cards</button> */}
         </div>
     </header>
 }

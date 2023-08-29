@@ -6,7 +6,8 @@ function StartScreen({startGame}) {
             <li>Step 2</li>
             <li>Step 3</li>
         </ul>
-        <button onClick={startGame}>New Game</button>
+        <p>Selecting images...</p>
+        <button onClick={startGame} className="startButton">New Game</button>
     </div>
 }
 
