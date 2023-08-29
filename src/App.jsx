@@ -45,6 +45,36 @@ function App() {
     })
   }
 
+  const playTurn = (e) => {
+    const chosenCard = cardDeck.find(card => card.key == e.target.dataset.key);
+    markCardClicked(chosenCard.key)
+    increaseScore();
+    updateBest();
+    // console.log(chosenCard)
+    shuffleCards();
+  }
+
+  const markCardClicked = (key) => {
+    setCardDeck(cardDeck.map(card => {
+      if (card.key === key) {
+        return {...card, clicked: true};
+      } else {
+        return card;
+      }
+    }));
+  };
+
+  const shuffleCards = () => {
+    setCardDeck((cardDeck) => {
+      const shuffledDeck = [...cardDeck];
+      for (let i = shuffledDeck.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [shuffledDeck[i], shuffledDeck[j]] = [shuffledDeck[j], shuffledDeck[i]];
+      }
+      return shuffledDeck;
+    });
+  };
+
   const increaseScore = () => {
     setScore(score => score + 1);
   };
@@ -65,7 +95,7 @@ function App() {
       <Header score={score} best={best}/>
       <main>
         <StartScreen drawDeck={drawDeck}/>
-        <CardBase cardDeck={cardDeck}/>
+        <CardBase cardDeck={cardDeck} playTurn={playTurn}/>
       </main>
       <Footer />
     </>
