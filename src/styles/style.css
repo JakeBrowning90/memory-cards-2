@@ -26,6 +26,12 @@ footer {
     background-color: rgb(252, 212, 212);
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .startScreen {
     background-color: rgb(242, 211, 86);
 }

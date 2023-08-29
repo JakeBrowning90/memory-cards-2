@@ -40,10 +40,8 @@ function App() {
   }, []);
   
   const drawDeck = () => {
-
     apiData.forEach((item, i) => {
-      setCardDeck((cardDeck) =>[...cardDeck, {key: i, title: item.title, url: item.url, clicked: false}])
-      
+      setCardDeck((cardDeck) =>[...cardDeck, {key: i, title: item.title, url: item.url, clicked: false}]);
     })
   }
 
@@ -57,7 +55,7 @@ function App() {
 
   const updateBest = () => {
     if (score == best) {
-      setBest(best => best + 1)
+      setBest(best => best + 1);
     }
   };
 

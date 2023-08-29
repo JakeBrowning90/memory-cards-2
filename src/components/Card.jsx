@@ -1,5 +1,5 @@
 function Card({card}) {
-    return <div className="gameCard" key={card.key}>
+    return <div className="gameCard">
         <img src={card.url} alt="" className="pic"/>
         <p>{card.key} {card.title}</p>
     </div>
