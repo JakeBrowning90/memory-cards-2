@@ -1,10 +1,10 @@
-function Header({score, best}) {
+function Header({score, best, resetGame}) {
     return <header>
         <h1>Astronomy Memory</h1>
         <div>
             <p>Current score: {score}</p>
             <p>Best score: {best}</p>
-            <button>Reset game</button>
+            <button onClick={resetGame}>Reset cards</button>
         </div>
     </header>
 }

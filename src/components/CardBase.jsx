@@ -1,7 +1,6 @@
 import Card from "./Card";
 
 function CardBase({cardDeck, playTurn}) {
-
     return <div className="cardBase">
         {cardDeck.map((card) => {
             //TODO: Add key props

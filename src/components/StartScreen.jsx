@@ -1,4 +1,4 @@
-function StartScreen({drawDeck}) {
+function StartScreen({startGame}) {
     return <div className="startScreen">
         <h1>Instructions</h1>
         <ul>
@@ -6,7 +6,7 @@ function StartScreen({drawDeck}) {
             <li>Step 2</li>
             <li>Step 3</li>
         </ul>
-        <button onClick={drawDeck}>Start Game</button>
+        <button onClick={startGame}>New Game</button>
     </div>
 }
 
