@@ -40,8 +40,10 @@ function App() {
   }, []);
   
   const drawDeck = () => {
-    apiData.forEach((item) => {
-      setCardDeck((cardDeck) =>[...cardDeck, {key: item.index ,title: item.title, url: item.url, clicked: false}])
+
+    apiData.forEach((item, i) => {
+      setCardDeck((cardDeck) =>[...cardDeck, {key: i, title: item.title, url: item.url, clicked: false}])
+      
     })
   }
 
