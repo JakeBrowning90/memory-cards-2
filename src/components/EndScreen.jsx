@@ -1,8 +1,18 @@
-function EndScreen({refreshPage}) {
+function EndScreen({cardDeck, refreshPage}) {
     return <div className="endScreen">
         <h1>Well done!</h1>
-        <a href="">Learn more</a>
-        <button onClick={refreshPage}>Refresh Page</button>
+        <p>Learn more about these images and our universe at <a href="https://apod.nasa.gov/apod/astropix.html" target="_blank">apod.nasa.gov</a>.</p>
+        
+        {/* TODO: map out links to page for each game image */}
+        <ul>
+            <h2>This games' images:</h2>
+            {cardDeck.map((card) => {
+                //TODO: Add key props
+                return <li><a href={card.link} target="_blank">{card.title}</a></li>
+            })}
+        </ul>
+       
+        <button onClick={refreshPage}>Play again</button>
     </div>
 }
 

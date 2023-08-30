@@ -59,8 +59,16 @@ footer {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 20%;
 }
+
+.startScreen {
+    height: 30%
+}
+
+.endScreen {
+    height: auto;
+}
+
 
 .startScreen > * {
     display: flex;
@@ -85,6 +93,9 @@ a, a::after {
 
 ul {
     list-style: square;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 main {
@@ -96,6 +107,7 @@ main {
 
 .endScreen {
     display: none;
+    /* display: flex; */
 }
 
 .visible {
@@ -125,8 +137,6 @@ main {
 
 .gameCard:hover {
     transform: scale(1.1); 
-    /* border: white 2px solid; */
-
 }
 
 .pic {

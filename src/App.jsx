@@ -14,18 +14,24 @@ function App() {
   const [best, setBest] = useState(0);
   const [apiData, setApiData] = useState([])
   const [cardDeck, setCardDeck] = useState([]);
-  const [lastCard, setLastCard] = useState('');
 
   //Operations
-
   const drawDeck = () => {
-    // TODO: Clear existing cardDeck
+    // Clear existing cardDeck (redundant with current build)
     setCardDeck(cardDeck => [])
     apiData.forEach((item, i) => {
-      setCardDeck((cardDeck) => [...cardDeck, { key: i, title: item.title, url: item.url, clicked: false }]);
+      setCardDeck((cardDeck) => [...cardDeck, { key: i, title: item.title, link: buildLink(item.date), url: item.url, clicked: false }]);
     })
   }
 
+  const buildLink = (date) => {
+    const newDate = date.charAt(2) + date.charAt(3) + date.charAt(5) + date.charAt(6) + date.charAt(8) + date.charAt(9);
+    const pageLink = "https://apod.nasa.gov/apod/ap" + newDate + ".html"
+    return pageLink;
+  } 
+
+
+  // Fetch data from API
   useEffect(() => {
     const getAPI = async () => {
       let response = await fetch('https://api.nasa.gov/planetary/apod?api_key=G3yRcK9CYp4SUcGrP8lYzRxRAWrBkFyY1NlQx7q2&count=16&');
@@ -33,35 +39,29 @@ function App() {
       let mediaCheck = data.filter(entry => {
         return entry.media_type != "image";
       })
+      // Repeat call if data contains media besides images
       if (mediaCheck.length != 0) {
         getAPI()
       } else {
         setApiData(data)
+        // Set flag to enable button to start game
         setLoadCount(loadCount => loadCount + 1)
-        //TODO: indicate game is ready, show button
-        console.log(loadCount)
       }
     }
     getAPI();
   }, []);
 
+  // Trigger end of game on perfect score, hide cards, show end screen
   useEffect(() => {
     if (score == 16) {
       let cardBase = document.querySelector(".cardBase");
       cardBase.classList.toggle("visibleBase");
       let endScreen = document.querySelector(".endScreen");
       endScreen.classList.toggle("visible");
-      // resetGame();
     }
   }, [score])
 
-  // const drawDeck = () => {
-  //   setCardDeck([]);
-  //   apiData.forEach((item, i) => {
-  //     setCardDeck((cardDeck) => [...cardDeck, { key: i, title: item.title, url: item.url, clicked: false }]);
-  //   })
-  // }
-
+  // On click, check if target card has already been clicked
   const playTurn = (e) => {
     const chosenCard = cardDeck.find(card => card.key == e.target.dataset.key);
     if (chosenCard.clicked == false) {
@@ -75,6 +75,7 @@ function App() {
     shuffleCards();
   }
 
+  // Update card as clicked
   const markCardClicked = (key) => {
     setCardDeck(cardDeck.map(card => {
       if (card.key === key) {
@@ -85,6 +86,7 @@ function App() {
     }));
   };
 
+  // Randomly rearrange card order in array
   const shuffleCards = () => {
     setCardDeck((cardDeck) => {
       const shuffledDeck = [...cardDeck];
@@ -106,23 +108,19 @@ function App() {
     }
   };
 
-  // const resetGame = () => {
-  //   resetScore();
-  //   drawDeck();
-  // }
-
   const resetScore = () => {
     setScore(score => score * 0);
   };
 
+  // Return all cards to clicked: false
   const resetCards = () => {
     setCardDeck(cardDeck.map(card => {
       return { ...card, clicked: false };
     }))
   }
 
+  // Hide start screen, display card screen
   const startGame = () => {
-    console.log(loadCount);
     let startScreen = document.querySelector(".startScreen");
     startScreen.classList.toggle("hidden");
     let cardBase = document.querySelector(".cardBase");
@@ -130,6 +128,7 @@ function App() {
     drawDeck();
   };
 
+  // End of game, restart game with new API fetch
   const refreshPage = () => {
     window.location.reload();
   }
@@ -138,10 +137,9 @@ function App() {
     <>
       <Header score={score} best={best} resetCards={resetCards}/>
       <main>
-        {/* <StartScreen drawDeck={drawDeck} /> */}
         <StartScreen loadCount={loadCount} startGame={startGame} />
         <CardBase cardDeck={cardDeck} playTurn={playTurn} />
-        <EndScreen refreshPage={refreshPage}/>
+        <EndScreen cardDeck={cardDeck} refreshPage={refreshPage}/>
       </main>
       <Footer />
     </>
