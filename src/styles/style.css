@@ -28,7 +28,7 @@ h2 {
     font-size: large;
 }
 
-header, footer {
+header, footer, .startScreen, .endScreen {
     background-color: var(--div-color);
     display: flex;
     padding: 10px;
@@ -47,22 +47,51 @@ header > * {
     gap: 5px;
 }
 
+main {
+    justify-content: center;
+}
+
 footer {
     flex-direction: column;
+}
+
+.startScreen, .endScreen {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 20%;
+}
+
+.startScreen > * {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
 }
 
 a, a::after {
     color: white;
 }
 
+.startStatus, button {
+    height: 20%;
+    width: 30%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ul {
+    list-style: square;
+}
+
 main {
+    height: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
-
-.startScreen, .endScreen {
-    background-color: var(--div-color);
 }
 
 .endScreen {

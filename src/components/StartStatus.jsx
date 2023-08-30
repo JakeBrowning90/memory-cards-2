@@ -1,8 +1,8 @@
 function StartStatus({loadCount, startGame}) {
     if (loadCount == 0) {
-        return  <p>Selecting images...</p>
+        return  <h2 className="startStatus"> Selecting images...</h2>
     } else {
-        return <button onClick={startGame} className="startButton">Start!</button>
+        return <button className="startStatus" onClick={startGame}>Start!</button>
     }
 }
 
