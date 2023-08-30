@@ -1,7 +1,7 @@
 function StartScreen({loadCount, startGame}) {
     if (loadCount == 0) {
     return <div className="startScreen">
-        <h1>Instructions</h1>
+        <h2>How to Play:</h2>
         <ul>
             <li>Click all 16 images without repeating yourself.</li>
             <li>If you click the same card twice, your score will reset.</li>
@@ -12,7 +12,7 @@ function StartScreen({loadCount, startGame}) {
     </div>
     } else {
         return <div className="startScreen">
-        <h1>How to Play:</h1>
+        <h2>How to Play:</h2>
         <ul>
             <li>Click all 16 images without repeating yourself.</li>
             <li>If you click the same card twice, your score will reset.</li>
