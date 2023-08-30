@@ -24,12 +24,12 @@ function App() {
     })
   }
 
+  // Change date from YYYY-MM-DD to YYMMDD and concat into URL
   const buildLink = (date) => {
     const newDate = date.charAt(2) + date.charAt(3) + date.charAt(5) + date.charAt(6) + date.charAt(8) + date.charAt(9);
     const pageLink = "https://apod.nasa.gov/apod/ap" + newDate + ".html"
     return pageLink;
   } 
-
 
   // Fetch data from API
   useEffect(() => {
