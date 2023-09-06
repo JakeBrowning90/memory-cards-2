@@ -8,7 +8,7 @@ function EndScreen({cardDeck, refreshPage}) {
             <h2>This games' images:</h2>
             {cardDeck.map((card) => {
                 //TODO: Add key props
-                return <li><a href={card.link} target="_blank">{card.title}</a></li>
+                return <li key={card.key}><a href={card.link} target="_blank">{card.title}</a></li>
             })}
         </ul>
        

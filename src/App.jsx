@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
-import './styles/reset.css'
-import './styles/style.css'
+import { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import './styles/reset.css';
+import './styles/style.css';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 import StartScreen from './components/StartScreen';
@@ -20,7 +21,7 @@ function App() {
     // Clear existing cardDeck (redundant with current build)
     setCardDeck(cardDeck => [])
     apiData.forEach((item, i) => {
-      setCardDeck((cardDeck) => [...cardDeck, { key: i, title: item.title, link: buildLink(item.date), url: item.url, clicked: false }]);
+      setCardDeck((cardDeck) => [...cardDeck, { key: uuidv4(), title: item.title, link: buildLink(item.date), url: item.url, clicked: false }]);
     })
   }
 
