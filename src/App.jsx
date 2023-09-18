@@ -70,8 +70,10 @@ function App() {
       increaseScore();
       updateBest();
     } else {
+      //TODO - Replace alert with styled modal
+      alert("Oops, you clicked the same card twice!");
       resetCards();
-      resetScore()
+      resetScore();
     }
     shuffleCards();
   }
