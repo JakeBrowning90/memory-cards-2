@@ -10,7 +10,7 @@ function StartScreen({ loadCount, loadComplete, startGame }) {
       </div>
 
       {loadComplete == false ? (
-        <h2 className="startStatus"> Selecting images...</h2>
+        <h2 className="startStatus">Selecting images...</h2>
       ) : (
         <button className="startStatus" onClick={startGame}>
           Start!
