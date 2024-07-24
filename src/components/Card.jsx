@@ -4,6 +4,10 @@ function Card({card, playTurn}) {
         <p className="cardCaption">
             {card.title}
         </p>
+
+        {/* Utility div to show clicked cards */}
+        {card.clicked ? <p>	&#10003;</p> :  <p>X</p>}
+  
     </div>
     
 }
