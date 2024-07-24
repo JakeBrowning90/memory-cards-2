@@ -16,6 +16,27 @@ function App() {
   const [best, setBest] = useState(0);
   const [apiData, setApiData] = useState([]);
   const [cardDeck, setCardDeck] = useState([]);
+  const [viewStart, setViewStart] = useState(true);
+  const [viewCards, setViewCards] = useState(false);
+  const [viewEnd, setViewEnd] = useState(false);
+
+  const navToStart = () => {
+    setViewStart(true);
+    setViewCards(false);
+    setViewEnd(false);
+  };
+
+  const navToCards = () => {
+    setViewStart(false);
+    setViewCards(true);
+    setViewEnd(false);
+  };
+
+  const navToEnd = () => {
+    setViewStart(false);
+    setViewCards(false);
+    setViewEnd(true);
+  };
 
   //Operations
   const drawDeck = () => {
@@ -78,12 +99,14 @@ function App() {
   }, []);
 
   // Trigger end of game on perfect score, hide cards, show end screen
+  // TODO: refactor to avoid useEffect
   useEffect(() => {
     if (score == 16) {
-      let cardBase = document.querySelector(".cardBase");
-      cardBase.classList.toggle("visibleBase");
-      let endScreen = document.querySelector(".endScreen");
-      endScreen.classList.toggle("visible");
+      // let cardBase = document.querySelector(".cardBase");
+      // cardBase.classList.toggle("visibleBase");
+      // let endScreen = document.querySelector(".endScreen");
+      // endScreen.classList.toggle("visible");
+      navToEnd()
     }
   }, [score]);
 
@@ -97,6 +120,7 @@ function App() {
       increaseScore();
       updateBest();
     } else {
+      alert("Oops! Try again!")
       resetCards();
       resetScore();
     }
@@ -142,7 +166,7 @@ function App() {
     setScore((score) => score * 0);
   };
 
-  // Return all cards to clicked: false
+  // Return all cards to "clicked: false"
   const resetCards = () => {
     setCardDeck(
       cardDeck.map((card) => {
@@ -153,11 +177,8 @@ function App() {
 
   // Hide start screen, display card screen
   const startGame = () => {
-    let startScreen = document.querySelector(".startScreen");
-    startScreen.classList.toggle("hidden");
-    let cardBase = document.querySelector(".cardBase");
-    cardBase.classList.toggle("visibleBase");
     drawDeck();
+    navToCards();
   };
 
   // End of game, restart game with new API fetch
@@ -167,15 +188,17 @@ function App() {
 
   return (
     <>
-      <Header score={score} best={best} resetCards={resetCards} />
+      <Header score={score} best={best} />
       <main>
-        <StartScreen
-          loadCount={loadCount}
-          loadComplete={loadComplete}
-          startGame={startGame}
-        />
-        <CardBase cardDeck={cardDeck} playTurn={playTurn} />
-        <EndScreen cardDeck={cardDeck} refreshPage={refreshPage} />
+        {viewStart && (
+          <StartScreen
+            loadCount={loadCount}
+            loadComplete={loadComplete}
+            startGame={startGame}
+          />
+        )}
+        {viewCards && <CardBase cardDeck={cardDeck} playTurn={playTurn} />}
+        {viewEnd && <EndScreen cardDeck={cardDeck} refreshPage={refreshPage} />}
       </main>
       <Footer />
     </>

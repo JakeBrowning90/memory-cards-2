@@ -69,7 +69,6 @@ footer {
     height: auto;
 }
 
-
 .startScreen > * {
     display: flex;
     flex-direction: column;
@@ -106,22 +105,17 @@ main {
 }
 
 .endScreen {
-    display: none;
-    /* display: flex; */
-}
-
-.visible {
     display: flex;
-    flex-direction: column;
 }
 
 .cardBase {
     box-sizing: border-box;
     height: auto;
-    display: none;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
     gap: 10px;
+    display: grid;
+
 }
 
 .gameCard {
@@ -150,12 +144,4 @@ main {
     margin: auto;
     text-overflow: ellipsis;
     font-size: small;
-}
-
-.hidden {
-    display: none;
-}
-
-.visibleBase {
-    display: grid;
 }

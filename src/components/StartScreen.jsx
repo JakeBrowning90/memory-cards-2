@@ -6,6 +6,7 @@ function StartScreen({ loadCount, loadComplete, startGame }) {
         <ul>
           <li>Click all 16 images without repeating yourself.</li>
           <li>If you click the same card twice, your score will reset.</li>
+          <li>Each new game has different images, so play again and again!</li>
         </ul>
       </div>
 
