@@ -7,6 +7,7 @@ import Footer from "./components/Footer.jsx";
 import StartScreen from "./components/StartScreen";
 import EndScreen from "./components/EndScreen";
 import CardBase from "./components/CardBase";
+import MistakeModal from "./components/MistakeModal.jsx";
 
 function App() {
   // useState hooks
@@ -16,25 +17,40 @@ function App() {
   const [best, setBest] = useState(0);
   const [apiData, setApiData] = useState([]);
   const [cardDeck, setCardDeck] = useState([]);
+  const [lastCard, setLastCard] = useState(null);
   const [viewStart, setViewStart] = useState(true);
   const [viewCards, setViewCards] = useState(false);
+  const [viewModal, setViewModal] = useState(false);
+
   const [viewEnd, setViewEnd] = useState(false);
 
   const navToStart = () => {
     setViewStart(true);
     setViewCards(false);
+    setViewModal(false);
     setViewEnd(false);
   };
 
   const navToCards = () => {
     setViewStart(false);
     setViewCards(true);
+    setViewModal(false);
+
+    setViewEnd(false);
+  };
+
+  const displayModal = () => {
+    setViewStart(false);
+    setViewCards(false);
+    setViewModal(true);
     setViewEnd(false);
   };
 
   const navToEnd = () => {
     setViewStart(false);
     setViewCards(false);
+    setViewModal(false);
+
     setViewEnd(true);
   };
 
@@ -102,11 +118,7 @@ function App() {
   // TODO: refactor to avoid useEffect
   useEffect(() => {
     if (score == 16) {
-      // let cardBase = document.querySelector(".cardBase");
-      // cardBase.classList.toggle("visibleBase");
-      // let endScreen = document.querySelector(".endScreen");
-      // endScreen.classList.toggle("visible");
-      navToEnd()
+      navToEnd();
     }
   }, [score]);
 
@@ -115,12 +127,14 @@ function App() {
     const chosenCard = cardDeck.find(
       (card) => card.key == e.target.dataset.key
     );
+    setLastCard(chosenCard);
     if (chosenCard.clicked == false) {
       markCardClicked(chosenCard.key);
       increaseScore();
       updateBest();
     } else {
-      alert("Oops! Try again!")
+      // TODO - Display card in Modal;
+      displayModal();
       resetCards();
       resetScore();
     }
@@ -198,6 +212,9 @@ function App() {
           />
         )}
         {viewCards && <CardBase cardDeck={cardDeck} playTurn={playTurn} />}
+        {viewModal && (
+          <MistakeModal lastCard={lastCard} navToCards={navToCards} />
+        )}
         {viewEnd && <EndScreen cardDeck={cardDeck} refreshPage={refreshPage} />}
       </main>
       <Footer />
