@@ -1,9 +1,9 @@
 function MistakeModal({ lastCard, navToCards }) {
   return (
     <div className="mistakeModal">
-      <h1>Oops! You clicked the same card twice!</h1>
+      <h1>Oops! You clicked this card twice:</h1>
 
-      <div className="gameCard">
+      <div className="modalCard">
         <img
           src={lastCard.url}
           alt=""

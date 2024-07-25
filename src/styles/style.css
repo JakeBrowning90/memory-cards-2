@@ -133,11 +133,12 @@ main {
   display: grid;
 }
 
-.gameCard {
+.gameCard, .modalCard {
   background-color: var(--div-color);
   border: white 1px solid;
   height: 150px;
   width: 100%;
+  max-width: 200px;
   position: static;
   display: flex;
   flex-direction: column;
