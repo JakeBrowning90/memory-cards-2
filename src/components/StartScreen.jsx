@@ -1,4 +1,4 @@
-function StartScreen({ loadCount, loadComplete, startGame }) {
+function StartScreen({ loadComplete, startGame }) {
   return (
     <div className="startScreen">
       <div>

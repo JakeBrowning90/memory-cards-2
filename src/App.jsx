@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import useStateWithCallback from "use-state-with-callback";
+
 import { v4 as uuidv4 } from "uuid";
 import "./styles/reset.css";
 import "./styles/style.css";
@@ -11,9 +13,12 @@ import MistakeModal from "./components/MistakeModal.jsx";
 
 function App() {
   // useState hooks
-  const [loadCount, setLoadCount] = useState(0);
   const [loadComplete, setLoadComplete] = useState(false);
-  const [score, setScore] = useState(0);
+  // const [score, setScore] = useState(0);
+  const [score, setScore] = useStateWithCallback(0, (score) => {
+    checkEndgame(score);
+  });
+
   const [best, setBest] = useState(0);
   const [apiData, setApiData] = useState([]);
   const [cardDeck, setCardDeck] = useState([]);
@@ -50,7 +55,6 @@ function App() {
     setViewStart(false);
     setViewCards(false);
     setViewModal(false);
-
     setViewEnd(true);
   };
 
@@ -116,11 +120,11 @@ function App() {
 
   // Trigger end of game on perfect score, hide cards, show end screen
   // TODO: refactor to avoid useEffect
-  useEffect(() => {
-    if (score == 16) {
-      navToEnd();
-    }
-  }, [score]);
+  // useEffect(() => {
+  //   if (score == 16) {
+  //     navToEnd();
+  //   }
+  // }, [score]);
 
   // On click, check if target card has already been clicked
   const playTurn = (e) => {
@@ -132,6 +136,9 @@ function App() {
       markCardClicked(chosenCard.key);
       increaseScore();
       updateBest();
+      // if (score == 16) {
+      //   navToEnd();
+      // }
     } else {
       // TODO - Display card in Modal;
       displayModal();
@@ -176,6 +183,12 @@ function App() {
     }
   };
 
+  const checkEndgame = (currentScore) => {
+    if (currentScore == 16) {
+      navToEnd();
+    }
+  };
+
   const resetScore = () => {
     setScore((score) => score * 0);
   };
@@ -205,11 +218,7 @@ function App() {
       <Header score={score} best={best} />
       <main>
         {viewStart && (
-          <StartScreen
-            loadCount={loadCount}
-            loadComplete={loadComplete}
-            startGame={startGame}
-          />
+          <StartScreen loadComplete={loadComplete} startGame={startGame} />
         )}
         {viewCards && <CardBase cardDeck={cardDeck} playTurn={playTurn} />}
         {viewModal && (
