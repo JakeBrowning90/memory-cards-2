@@ -14,11 +14,9 @@ import MistakeModal from "./components/MistakeModal.jsx";
 function App() {
   // useState hooks
   const [loadComplete, setLoadComplete] = useState(false);
-  // const [score, setScore] = useState(0);
   const [score, setScore] = useStateWithCallback(0, (score) => {
     checkEndgame(score);
   });
-
   const [best, setBest] = useState(0);
   const [apiData, setApiData] = useState([]);
   const [cardDeck, setCardDeck] = useState([]);
@@ -30,6 +28,10 @@ function App() {
   const [viewEnd, setViewEnd] = useState(false);
 
   const navToStart = () => {
+    resetScore();
+    resetBest();
+    setLoadComplete(false);
+    newGameFetch();
     setViewStart(true);
     setViewCards(false);
     setViewModal(false);
@@ -89,7 +91,26 @@ function App() {
     return pageLink;
   };
 
-  // Fetch data from API
+  // Manually trigger fetch sepatate from useEffect
+  const newGameFetch = async () => {
+    let response = await fetch(
+      "https://api.nasa.gov/planetary/apod?api_key=G3yRcK9CYp4SUcGrP8lYzRxRAWrBkFyY1NlQx7q2&count=16&"
+    );
+    let data = await response.json();
+    let mediaCheck = data.filter((entry) => {
+      return entry.media_type != "image";
+    });
+    // Repeat call if data contains media besides images
+    if (mediaCheck.length != 0) {
+      newGameFetch();
+    } else {
+      setApiData(data);
+      // Set flag to enable button to start game
+      setLoadComplete(true);
+    }
+  };
+
+  // Fetch data from API on page load
   useEffect(() => {
     let ignore = false;
 
@@ -181,6 +202,10 @@ function App() {
     setScore((score) => score * 0);
   };
 
+  const resetBest = () => {
+    setBest((best) => best * 0);
+  };
+
   // Return all cards to "clicked: false"
   const resetCards = () => {
     setCardDeck(
@@ -196,11 +221,6 @@ function App() {
     navToCards();
   };
 
-  // End of game, restart game with new API fetch
-  const refreshPage = () => {
-    window.location.reload();
-  };
-
   return (
     <>
       <Header score={score} best={best} />
@@ -212,7 +232,7 @@ function App() {
         {viewModal && (
           <MistakeModal lastCard={lastCard} navToCards={navToCards} />
         )}
-        {viewEnd && <EndScreen cardDeck={cardDeck} refreshPage={refreshPage} />}
+        {viewEnd && <EndScreen cardDeck={cardDeck} navToStart={navToStart} />}
       </main>
       <Footer />
     </>
