@@ -16,7 +16,7 @@ This is my second attempt at making a Memory Game since TOP's revision to their 
 There are still thing's I'd like to do with this, but didn't seem important right now:
 1. Card animations between turns.
 2. Animation on score when resetting to 0.
-3. Improved option for new fetch: I struggled to get the fetch to run again after the initial mount without also looping infinitely. My workaround was to include the button to refresh the page at the end of the game and trigger a new "initial mount".
+3. ~~Improved option for new fetch: I struggled to get the fetch to run again after the initial mount without also looping infinitely. My workaround was to include the button to refresh the page at the end of the game and trigger a new "initial mount".~~ Update: I returned to this project to implement conditional rendering for all views, as well as a separate function to fetch a new set of cards without invoking useEffect again.
 
 I was wary of revisiting this project as I was so happy with my first version, but I was ultimately very motivated to make into something fun and interesting for users.
 
