@@ -118,14 +118,6 @@ function App() {
     };
   }, []);
 
-  // Trigger end of game on perfect score, hide cards, show end screen
-  // TODO: refactor to avoid useEffect
-  // useEffect(() => {
-  //   if (score == 16) {
-  //     navToEnd();
-  //   }
-  // }, [score]);
-
   // On click, check if target card has already been clicked
   const playTurn = (e) => {
     const chosenCard = cardDeck.find(
@@ -136,11 +128,7 @@ function App() {
       markCardClicked(chosenCard.key);
       increaseScore();
       updateBest();
-      // if (score == 16) {
-      //   navToEnd();
-      // }
     } else {
-      // TODO - Display card in Modal;
       displayModal();
       resetCards();
       resetScore();
