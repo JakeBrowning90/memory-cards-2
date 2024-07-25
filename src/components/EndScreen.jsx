@@ -24,7 +24,7 @@ function EndScreen({ cardDeck, navToStart }) {
         })}
       </ul>
 
-      <button onClick={navToStart}>Play again</button>
+      <button onClick={navToStart}>Play New Game</button>
     </div>
   );
 }
